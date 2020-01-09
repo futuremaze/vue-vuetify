@@ -8,22 +8,32 @@
           <v-list-item-content>
             <!-- grey--text: テキスト文字色をグレーに -->
             <!-- text--darken-2: 色の濃さを変更 -->
-            <v-list-item-title class="title grey--text text--darken-2">
-              Navigation Lists
-            </v-list-item-title>
+            <v-list-item-title class="title grey--text text--darken-2">Navigation Lists</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
         <!-- dense, nav: スタイリング調整 -->
         <v-list dense nav>
-          <v-list-item v-for="navList in navLists" :key="navList.name">
-            <v-list-item-icon>
-              <v-icon>{{ navList.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>{{ navList.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          <!-- no-action: ネスト化されたメニューの左側にpaddingを設ける -->
+          <!-- append-icon: 下の階層がないメニューは矢印アイコンを表示しない -->
+          <v-list-group
+          v-for="navList in navLists"
+          :key="navList.name"
+          :prepend-icon="navList.icon"
+          no-action
+          :append-icon="navList.lists ? undefined : ''"
+          >
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title>{{ navList.name }}</v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item v-for="list in navList.lists" :key="list">
+              <v-list-item-content>
+                <v-list-item-title>{{ list }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
         </v-list>
       </v-container>
     </v-navigation-drawer>
@@ -41,7 +51,10 @@
         <v-btn text>For Enterprise</v-btn>
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" text>Support<v-icon>mdi-menu-down</v-icon></v-btn>
+            <v-btn v-on="on" text>
+              Support
+              <v-icon>mdi-menu-down</v-icon>
+            </v-btn>
           </template>
           <v-list>
             <v-subheader>Get help</v-subheader>
@@ -60,9 +73,7 @@
     <!-- color: 背景色指定 primary: デフォルト(水色) -->
     <!-- dark: 文字色が白に -->
     <!-- app: 高さの自動調整 -->
-    <v-footer color="primary" dark app>
-      Vuetify
-    </v-footer>
+    <v-footer color="primary" dark app>Vuetify</v-footer>
   </v-app>
 </template>
 
@@ -81,12 +92,33 @@ export default {
       { name: "Stack overview", icon: "mdi-stack-overflow" }
     ],
     navLists: [
-      { name: "Getting Started", icon: "mdi-speedometer" },
-      { name: "Customization", icon: "mdi-cogs" },
-      { name: "Styles & animations", icon: "mdi-palette" },
-      { name: "UI Components", icon: "mdi-view-dashboard" },
-      { name: "Directives", icon: "mdi-function" },
-      { name: "Premium themes", icon: "mdi-vuetify" }
+      {
+        name: "Getting Started",
+        icon: "mdi-speedometer",
+        lists: ["Quick Start", "Pre-made layouts"]
+      },
+      {
+        name: "Customization",
+        icon: "mdi-cogs"
+      },
+      {
+        name: "Styles & animations",
+        icon: "mdi-palette",
+        lists: ["Colors", "Content", "Display"]
+      },
+      {
+        name: "UI Components",
+        icon: "mdi-view-dashboard",
+        lists: ["API explorer", "Alerts"]
+      },
+      {
+        name: "Directives",
+        icon: "mdi-function"
+      },
+      {
+        name: "Premium themes",
+        icon: "mdi-vuetify"
+      }
     ]
   })
 };
