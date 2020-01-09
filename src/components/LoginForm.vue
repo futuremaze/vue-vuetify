@@ -7,6 +7,9 @@
       <v-form>
         <v-text-field label="ユーザー名" />
         <v-text-field type="password" label="パスワード" />
+        <v-card-actions>
+          <v-btn>ログイン</v-btn>
+        </v-card-actions>
       </v-form>
     </v-card-text>
   </v-card>
