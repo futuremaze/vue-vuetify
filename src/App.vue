@@ -17,7 +17,19 @@
       <!-- v-toolbar-items: 囲むことによりアイテムの領域判定がapp-barの高さと同じになる -->
       <v-toolbar-items>
         <v-btn text>For Enterprise</v-btn>
-        <v-btn text>Support</v-btn>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" text>Support<v-icon>mdi-menu-down</v-icon></v-btn>
+          </template>
+          <v-list>
+            <v-subheader>Get help</v-subheader>
+            <v-list-item v-for="support in supports" :key="support">
+              <v-list-item-content>
+                <v-list-item-title>{{ support }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-toolbar-items>
     </v-app-bar>
     <!-- color: 背景色指定 primary: デフォルト(水色) -->
@@ -35,7 +47,14 @@ export default {
 
   data: () => ({
     //
-    drawer: null
+    drawer: null,
+    supports: [
+      "Consulting and support",
+      "Discord community",
+      "Report a bug",
+      "Github issue board",
+      "Stack overview"
+    ]
   })
 };
 </script>
