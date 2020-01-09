@@ -70,6 +70,9 @@
         </v-menu>
       </v-toolbar-items>
     </v-app-bar>
+    <v-content>
+      <router-view />
+    </v-content>
     <!-- color: 背景色指定 primary: デフォルト(水色) -->
     <!-- dark: 文字色が白に -->
     <!-- app: 高さの自動調整 -->
