@@ -13,6 +13,12 @@
       <!-- v-app-bar-nav-icon: ハンバーガーメニューアイコン -->
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Vuetify</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <!-- v-toolbar-items: 囲むことによりアイテムの領域判定がapp-barの高さと同じになる -->
+      <v-toolbar-items>
+        <v-btn text>For Enterprise</v-btn>
+        <v-btn text>Support</v-btn>
+      </v-toolbar-items>
     </v-app-bar>
     <!-- color: 背景色指定 primary: デフォルト(水色) -->
     <!-- dark: 文字色が白に -->
