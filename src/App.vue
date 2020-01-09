@@ -3,7 +3,29 @@
     <!-- app: 高さの自動調整 -->
     <!-- clipped: ナビゲーションメニューをナビゲーションバーの下に表示する -->
     <v-navigation-drawer app v-model="drawer" clipped>
-      Navigation Lists
+      <v-container>
+        <v-list-item>
+          <v-list-item-content>
+            <!-- grey--text: テキスト文字色をグレーに -->
+            <!-- text--darken-2: 色の濃さを変更 -->
+            <v-list-item-title class="title grey--text text--darken-2">
+              Navigation Lists
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <!-- dense, nav: スタイリング調整 -->
+        <v-list dense nav>
+          <v-list-item v-for="navList in navLists" :key="navList.name">
+            <v-list-item-icon>
+              <v-icon>{{ navList.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ navList.name }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-container>
     </v-navigation-drawer>
     <!-- color: 背景色指定 primary: デフォルト(水色) -->
     <!-- dark: 文字色が白に -->
@@ -57,6 +79,14 @@ export default {
       { name: "Report a bug", icon: "mdi-bug" },
       { name: "Github issue board", icon: "mdi-github-face" },
       { name: "Stack overview", icon: "mdi-stack-overflow" }
+    ],
+    navLists: [
+      { name: "Getting Started", icon: "mdi-speedometer" },
+      { name: "Customization", icon: "mdi-cogs" },
+      { name: "Styles & animations", icon: "mdi-palette" },
+      { name: "UI Components", icon: "mdi-view-dashboard" },
+      { name: "Directives", icon: "mdi-function" },
+      { name: "Premium themes", icon: "mdi-vuetify" }
     ]
   })
 };
