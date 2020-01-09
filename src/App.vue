@@ -48,7 +48,7 @@
       <v-spacer></v-spacer>
       <!-- v-toolbar-items: 囲むことによりアイテムの領域判定がapp-barの高さと同じになる -->
       <v-toolbar-items>
-        <v-btn text>For Enterprise</v-btn>
+        <v-btn text to="/enterprise">For Enterprise</v-btn>
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" text>
