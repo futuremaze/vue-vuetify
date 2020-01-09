@@ -23,9 +23,12 @@
           </template>
           <v-list>
             <v-subheader>Get help</v-subheader>
-            <v-list-item v-for="support in supports" :key="support">
+            <v-list-item v-for="support in supports" :key="support.name">
+              <v-list-item-icon>
+                <v-icon>{{ support.icon }}</v-icon>
+              </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>{{ support }}</v-list-item-title>
+                <v-list-item-title>{{ support.name }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -49,11 +52,11 @@ export default {
     //
     drawer: null,
     supports: [
-      "Consulting and support",
-      "Discord community",
-      "Report a bug",
-      "Github issue board",
-      "Stack overview"
+      { name: "Consulting and support", icon: "mdi-vuetify" },
+      { name: "Discord community", icon: "mdi-discord" },
+      { name: "Report a bug", icon: "mdi-bug" },
+      { name: "Github issue board", icon: "mdi-github-face" },
+      { name: "Stack overview", icon: "mdi-stack-overflow" }
     ]
   })
 };
