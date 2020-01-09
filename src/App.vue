@@ -1,21 +1,17 @@
 <template>
   <v-app>
-    <LoginForm></LoginForm>
+    <v-app-bar>
+      <v-toolbar-title>Vuetify</v-toolbar-title>
+    </v-app-bar>
   </v-app>
 </template>
 
 <script>
-import LoginForm from "@/components/LoginForm.vue";
-
 export default {
   name: "App",
 
   data: () => ({
     //
-  }),
-
-  components: {
-    LoginForm
-  }
+  })
 };
 </script>
