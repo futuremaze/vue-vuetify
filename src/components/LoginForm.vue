@@ -7,10 +7,11 @@
       <v-form>
         <v-text-field type="text" prepend-icon="mdi-account-circle" label="ユーザー名" />
         <v-text-field
-          type="password"
+          :type="showPassword ? 'text' : 'password'"
           prepend-icon="mdi-lock"
-          append-icon="mdi-eye-off"
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           label="パスワード"
+          @click:append="showPassword = !showPassword"
         />
         <v-card-actions>
           <v-btn class="primary">ログイン</v-btn>
@@ -19,3 +20,11 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    showPassword: false
+  })
+};
+</script>
