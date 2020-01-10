@@ -16,24 +16,30 @@
         <v-list dense nav>
           <!-- no-action: ネスト化されたメニューの左側にpaddingを設ける -->
           <!-- append-icon: 下の階層がないメニューは矢印アイコンを表示しない -->
-          <v-list-group
-          v-for="navList in navLists"
-          :key="navList.name"
-          :prepend-icon="navList.icon"
-          no-action
-          :append-icon="navList.lists ? undefined : ''"
-          >
-            <template v-slot:activator>
+          <div v-for="navList in navLists" :key="navList.name">
+            <!-- ネストされたメニューがあるメニュー -->
+            <v-list-group v-if="navList.lists" :prepend-icon="navList.icon" no-action>
+              <template v-slot:activator>
+                <v-list-item-content>
+                  <v-list-item-title>{{ navList.name }}</v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <v-list-item v-for="list in navList.lists" :key="list" :to="list.link">
+                <v-list-item-content>
+                  <v-list-item-title>{{ list.name }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-group>
+            <!-- ネストされたメニューがないメニュー -->
+            <v-list-item v-else :prepend-icon="navList.icon" :to="navList.link">
+              <v-list-item-icon>
+                <v-icon v-text="navList.icon"></v-icon>
+              </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>{{ navList.name }}</v-list-item-title>
               </v-list-item-content>
-            </template>
-            <v-list-item v-for="list in navList.lists" :key="list">
-              <v-list-item-content>
-                <v-list-item-title>{{ list }}</v-list-item-title>
-              </v-list-item-content>
             </v-list-item>
-          </v-list-group>
+          </div>
         </v-list>
       </v-container>
     </v-navigation-drawer>
@@ -58,7 +64,7 @@
           </template>
           <v-list>
             <v-subheader>Get help</v-subheader>
-            <v-list-item v-for="support in supports" :key="support.name">
+            <v-list-item v-for="support in supports" :key="support.name" :to="support.link">
               <v-list-item-icon>
                 <v-icon>{{ support.icon }}</v-icon>
               </v-list-item-icon>
@@ -88,39 +94,93 @@ export default {
     //
     drawer: null,
     supports: [
-      { name: "Consulting and support", icon: "mdi-vuetify" },
-      { name: "Discord community", icon: "mdi-discord" },
-      { name: "Report a bug", icon: "mdi-bug" },
-      { name: "Github issue board", icon: "mdi-github-face" },
-      { name: "Stack overview", icon: "mdi-stack-overflow" }
+      {
+        name: "Consulting and support",
+        icon: "mdi-vuetify",
+        link: "/consulting-and-support"
+      },
+      {
+        name: "Discord community",
+        icon: "mdi-discord",
+        link: "/discord-community"
+      },
+      {
+        name: "Report a bug",
+        icon: "mdi-bug",
+        link: "/report-a-bug"
+      },
+      {
+        name: "Github issue board",
+        icon: "mdi-github-face",
+        link: "/guthub-issue-board"
+      },
+      {
+        name: "Stack overview",
+        icon: "mdi-stack-overflow",
+        link: "/stack-overview"
+      }
     ],
     navLists: [
       {
         name: "Getting Started",
         icon: "mdi-speedometer",
-        lists: ["Quick Start", "Pre-made layouts"]
+        lists: [
+          {
+            name: "Quick Start",
+            link: "/quick-start"
+          },
+          {
+            name: "Pre-made layouts",
+            link: "/pre-made-layouts"
+          }
+        ]
       },
       {
         name: "Customization",
-        icon: "mdi-cogs"
+        icon: "mdi-cogs",
+        link: "/customization"
       },
       {
         name: "Styles & animations",
         icon: "mdi-palette",
-        lists: ["Colors", "Content", "Display"]
+        lists: [
+          {
+            name: "Colors",
+            link: "/colors"
+          },
+          {
+            name: "Content",
+            link: "/content"
+          },
+          {
+            name: "Display",
+            link: "/display"
+          }
+        ]
       },
       {
         name: "UI Components",
         icon: "mdi-view-dashboard",
-        lists: ["API explorer", "Alerts"]
+        lists: [
+          {
+            name: "API explorer",
+            link: "/api_explorer"
+          },
+          {
+            name: "Alerts",
+            link: "/alerts"
+          }
+        ]
       },
       {
         name: "Directives",
-        icon: "mdi-function"
+        icon: "mdi-function",
+        link: "/directives"
       },
       {
         name: "Premium themes",
-        icon: "mdi-vuetify"
+        icon: "mdi-vuetify",
+        link: "premium-themes"
       }
     ]
   })
